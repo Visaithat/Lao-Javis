@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y", "@playwright/mcp@latest",
+        "--browser", "chrome",
+        "--user-data-dir", "D:\\playwright-profile"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\playwright-browsers"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+/* Transparent window — only the bars are visible. */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;  /* let user drag the frameless window */
+  cursor: default;
+}
+
+#viz {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

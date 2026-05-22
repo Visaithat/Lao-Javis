@@ -1,0 +1,8 @@
+google-genai>=1.0.0
+sounddevice>=0.4.7
+numpy>=1.26
+silero-vad>=5.1
+edge-tts>=7.0
+playsound3>=2.5
+python-dotenv>=1.0
+pywebview>=5.0
