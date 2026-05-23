@@ -76,12 +76,14 @@ async def _conversation(
     import time as _time
     while True:
         ui.set_state("listening")
-        text: Optional[str] = await asyncio.to_thread(voice.listen_once, LISTEN_TIMEOUT_S)
+        ui.set_partial_transcript("")
+        t0 = _time.monotonic()
+        text: Optional[str] = await voice.listen_once(LISTEN_TIMEOUT_S)
+        ui.set_partial_transcript("")
         if not text:
             # No speech this round — just keep listening. UI stays "listening".
             continue
-        t0 = _time.monotonic()
-        print(f"[user] {text}")
+        print(f"[user +{_time.monotonic() - t0:.1f}s] {text}")
         if is_quit(text):
             ui.set_state("speaking")
             await asyncio.to_thread(tts.speak, GOODBYE)
@@ -123,7 +125,10 @@ async def _conversation(
 async def run(ui: JavisOverlay) -> None:
     tts = TextToSpeech()
     streaming_tts = StreamingTTS()
-    voice = VoiceCapture(on_amplitude=ui.feed_amplitude)
+    voice = VoiceCapture(
+        on_amplitude=ui.feed_amplitude,
+        on_partial=ui.set_partial_transcript,
+    )
     agent = Agent()
 
     wake_event = threading.Event()

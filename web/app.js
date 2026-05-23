@@ -46,6 +46,13 @@
     amp = Math.max(amp, level);  // peak hold; decays in tick
   };
 
+  const partialEl = document.getElementById('partial');
+  window.setPartial = (text) => {
+    if (typeof text !== 'string') text = '';
+    partialEl.textContent = text;
+    partialEl.classList.toggle('visible', text.length > 0);
+  };
+
   // --- per-state target update ---
   function updateTargets(now) {
     if (state === 'listening') {

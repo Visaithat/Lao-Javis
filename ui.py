@@ -90,6 +90,14 @@ class JavisOverlay:
         except Exception:
             pass
 
+    def set_partial_transcript(self, text: str) -> None:
+        if not self._wait_ready(timeout=0.0):
+            return
+        try:
+            self._win.evaluate_js(f"window.setPartial({json.dumps(text)})")
+        except Exception:
+            pass
+
     def quit(self) -> None:
         self._destroyed = True
         try:
